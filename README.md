@@ -60,7 +60,7 @@ docker build -t devops-classic-app:local .
 docker run -d -p 8080:5000 --name my-test-app devops-classic-app:local
 ```
 
-[Access the application at ](http://localhost:8080/.)
+Access the application at http://localhost:8080/.
 
 ## **Step 2: Configure the CI/CD Pipeline (GitHub Actions)**
 The pipeline is defined in the file: .github/workflows/deploy.yml.
