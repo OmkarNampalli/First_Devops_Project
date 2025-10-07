@@ -1,0 +1,46 @@
+# deploy.yml
+name: CI/CD Pipeline to Docker Hub
+
+# 1. Trigger the workflow on every push to the 'main' branch
+on:
+  push:
+    branches:
+      - main
+
+# Define environment variables (optional, but helpful)
+env:
+  DOCKER_REGISTRY: docker.io
+  IMAGE_REPOSITORY: ${{ secrets.IMAGE_NAME }} # e.g., yourusername/devops-classic-app
+  IMAGE_TAG: ${{ github.sha }} # Use the commit hash for a unique tag
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    
+    steps:
+    
+      # Checkout the repository code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. Login to the Container Registry (Docker Hub or GHCR)
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # 3. Build the Docker Image
+      - name: Build Docker Image
+        # Notice we tag the image with the unique commit SHA (github.sha)
+        run: docker build -t ${{ env.IMAGE_REPOSITORY }}:${{ env.IMAGE_TAG }} .
+
+      # 4. Push the Image to the Registry
+      - name: Push Docker Image
+        run: docker push ${{ env.IMAGE_REPOSITORY }}:${{ env.IMAGE_TAG }}
+        
+      # 5. Push a 'latest' tag for convenience (optional)
+      - name: Push 'latest' Tag
+        run: |
+          docker tag ${{ env.IMAGE_REPOSITORY }}:${{ env.IMAGE_TAG }} ${{ env.IMAGE_REPOSITORY }}:latest
+          docker push ${{ env.IMAGE_REPOSITORY }}:latest
