@@ -7,7 +7,7 @@ The goal of this project was to establish a fully automated software delivery pr
 
 Technologies Used
 |Category|Tool|Purpose|
-|:---|:---:|---:|
+|:---:|:---:|:---:|
 |Source Control|Git / GitHub|Version control and repository hosting.|
 |CI/CD Platform|GitHub Actions|Defined the automated build and push workflow (Pipeline as Code).|
 |Containerization|Docker|Packaged the application and dependencies into a single, portable image.|
@@ -78,6 +78,7 @@ The pipeline is defined in the file: .github/workflows/deploy.yml.
 
 ## 📁 Repository Contents
 |File/Folder|Description|
+|:---:|:---:|
 |app.py|The main Python Flask application file.|
 |requirements.txt|Lists the Python dependencies (Flask).|
 |Dockerfile|Instructions for building the container image.|
