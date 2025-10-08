@@ -41,7 +41,7 @@ You need the following installed locally:
 
 * A Docker Hub Account (for the push step)
 
-##**Step 1: Local Setup and Containerization**
+## **Step 1: Local Setup and Containerization**
 1. **Clone the Repository:**
 ```bash
 git clone [YOUR-REPO-URL]
